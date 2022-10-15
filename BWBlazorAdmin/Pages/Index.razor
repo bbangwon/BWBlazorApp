@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using ChartJs.Blazor.LineChart
+@using ChartJs.Blazor.PieChart
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -127,7 +129,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                    <Chart Config="_lineConfig"></Chart>
                 </div>
             </div>
         </div>
@@ -157,7 +159,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                    <Chart Config="_pieConfig"></Chart>
                 </div>
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
@@ -338,3 +340,125 @@
         </div>
     </div>
 </div>
+
+@code {
+    private const int InitalCount = 7;
+    private LineConfig? _lineConfig;
+    private PieConfig? _pieConfig;
+
+    protected override void OnInitialized()
+    {
+        InitLineChart();
+        InitPieChart();
+    }
+
+    void InitLineChart()
+    {
+        _lineConfig = new LineConfig
+            {
+                Options = new LineOptions
+                {
+                    Responsive = true,
+                    Title = new OptionsTitle
+                    {
+                        Display = true,
+                        Text = "ChartJs.Blazor Line Chart"
+                    },
+                    Tooltips = new Tooltips
+                    {
+                        Mode = InteractionMode.Nearest,
+                        Intersect = true
+                    },
+                    Hover = new Hover
+                    {
+                        Mode = InteractionMode.Nearest,
+                        Intersect = true
+                    },
+                    Scales = new Scales
+                    {
+                        XAxes = new List<CartesianAxis>
+                        {
+                            new CategoryAxis
+                            {
+                                ScaleLabel = new ScaleLabel
+                                {
+                                    LabelString = "Month"
+                                }
+                            }
+                        },
+                        YAxes = new List<CartesianAxis>
+                        {
+                            new LinearCartesianAxis
+                            {
+                                ScaleLabel = new ScaleLabel
+                                {
+                                    LabelString = "Value"
+                                }
+                            }
+                        }
+                    },
+                    MaintainAspectRatio = false
+                }
+            };
+
+        IDataset<int> dataset1 = new LineDataset<int>(RandomScalingFactor(InitalCount))
+            {
+                Label = "My first dataset",
+                BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+                BorderColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+                Fill = FillingMode.Disabled
+            };
+
+        IDataset<int> dataset2 = new LineDataset<int>(RandomScalingFactor(InitalCount))
+            {
+                Label = "My second dataset",
+                BackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
+                BorderColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
+                Fill = FillingMode.Disabled
+            };
+
+        (_lineConfig.Data.Labels as List<string>)?.AddRange(Months.Take(InitalCount));
+        _lineConfig.Data.Datasets.Add(dataset1);
+        _lineConfig.Data.Datasets.Add(dataset2);
+    }
+
+    void InitPieChart()
+    {
+        _pieConfig = new PieConfig
+            {
+                Options = new PieOptions
+                {
+                    Responsive = true,
+                    Title = new OptionsTitle
+                    {
+                        Display = true,
+                        Text = "ChartJs.Blazor Pie Chart"
+                    },
+                    MaintainAspectRatio = false,
+                    Legend = new Legend
+                    {
+                        Display = false
+                    }
+                }
+            };
+
+        foreach (string color in new[] { "Direct", "Social", "Referral" })
+        {
+            _pieConfig.Data.Labels.Add(color);
+        }
+
+        PieDataset<int> dataset = new PieDataset<int>(new[] { 6, 5, 3 })
+            {
+                BackgroundColor = new[]
+                {
+                    "#4e73df",
+                    "#1cc88a",
+                    "#36b9cc"
+                }
+            };
+
+        _pieConfig.Data.Datasets.Add(dataset);
+    }
+
+
+}

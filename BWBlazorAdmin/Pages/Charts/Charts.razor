@@ -1,0 +1,210 @@
+﻿@page "/Charts/Charts"
+@using ChartJs.Blazor.BarChart
+@using ChartJs.Blazor.PieChart
+@using System.Drawing
+@using ChartJs.Blazor.RadarChart
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Charts</h1>
+<p class="mb-4">
+    Chart.js is a third party plugin that is used to generate the charts in this theme.
+    The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">
+        official Chart.js
+        documentation
+    </a>.
+</p>
+
+<!-- Content Row -->
+<div class="row">
+
+    <div class="col-xl-8 col-lg-7">
+
+        <!-- Area Chart -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Radar Chart</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <Chart Config="_radarConfig"></Chart>
+                    
+                </div>
+                <hr>
+                Styling for the area chart can be found in the
+                <code>/js/demo/chart-area-demo.js</code> file.
+            </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-bar">
+                    <Chart Config="_barConfig" @ref="_barChart"></Chart>
+                </div>
+                <hr>
+                Styling for the bar chart can be found in the
+                <code>/js/demo/chart-bar-demo.js</code> file.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Donut Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4">
+                    <Chart Config="_pieConfig"></Chart>
+                </div>
+                <hr>
+                Styling for the donut chart can be found in the
+                <code>/js/demo/chart-pie-demo.js</code> file.
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    private PieConfig? _pieConfig;
+
+    private const int InitalCount = 7;
+    private BarConfig? _barConfig;
+    private Chart _barChart;
+
+    private RadarConfig? _radarConfig;
+
+    protected override void OnInitialized()
+    {
+        InitPieChart();
+        InitBarChart();
+        InitRadarChart();
+    }
+
+    void InitPieChart()
+    {
+        _pieConfig = new PieConfig
+        {              
+            Options = new PieOptions
+            {                    
+                Responsive = true,
+                Title = new OptionsTitle
+                {
+                    Display = true,
+                    Text = "ChartJs.Blazor Pie Chart"
+                },
+                MaintainAspectRatio = false
+            }
+        };
+
+        foreach (string color in new[] { "Red", "Yellow", "Green", "Blue" })
+        {
+            _pieConfig.Data.Labels.Add(color);
+        }
+
+        PieDataset<int> dataset = new PieDataset<int>(new[] { 6, 5, 3, 7 })
+            {
+                BackgroundColor = new[]
+                    {
+            ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
+            ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
+            ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
+            ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+        }
+            };
+
+        _pieConfig.Data.Datasets.Add(dataset);
+    }
+
+    void InitBarChart()
+    {
+        _barConfig = new BarConfig(horizontal: true)
+            {
+                Options = new BarOptions
+                {
+                    Responsive = true,
+                    Title = new OptionsTitle
+                    {
+                        Display = true,
+                        Text = "ChartJs.Blazor Horizontal Bar Chart"
+                    },
+                    MaintainAspectRatio = false
+                }
+            };
+
+        IDataset<int> dataset1 = new BarDataset<int>(RandomScalingFactor(InitalCount), horizontal: true)
+            {
+                Label = "My first dataset",
+                BackgroundColor = ColorUtil.FromDrawingColor(Color.FromArgb(128, ChartColors.Red)),
+                BorderColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+                BorderWidth = 1
+            };
+
+        IDataset<int> dataset2 = new BarDataset<int>(RandomScalingFactor(InitalCount), horizontal: true)
+            {
+                Label = "My second dataset",
+                BackgroundColor = ColorUtil.FromDrawingColor(Color.FromArgb(128, ChartColors.Blue)),
+                BorderColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
+                BorderWidth = 1
+            };
+
+        (_barConfig.Data.Labels as List<string>).AddRange(Months.Take(InitalCount));
+        _barConfig.Data.Datasets.Add(dataset1);
+        _barConfig.Data.Datasets.Add(dataset2);
+    }
+
+    void InitRadarChart()
+    {
+        _radarConfig = new RadarConfig {
+                Options = new RadarOptions {
+                    Responsive = true,
+                    MaintainAspectRatio = false,
+                }
+            };
+
+        IDataset<int> dataset1 = new RadarDataset<int>(new int[] { 65, 59, 90, 81, 56, 55, 40 })
+    {
+            Label = "My First Dataset",
+            Fill = true,
+            BackgroundColor = ColorUtil.FromDrawingColor(Color.FromArgb(128, ChartColors.Red)),
+            BorderColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+            PointBackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Red),
+            PointBorderColor = "#FFF",
+            PointHoverBackgroundColor = "#FFF",
+            PointHoverBorderColor = ColorUtil.FromDrawingColor(ChartColors.Red)
+        };
+
+        IDataset<int> dataset2 = new RadarDataset<int>(new int[] { 28, 48, 40, 19, 96, 27, 100 })
+        {
+                Label = "My Second Dataset",
+                Fill = true,
+                BackgroundColor = ColorUtil.FromDrawingColor(Color.FromArgb(128, ChartColors.Blue)),
+                BorderColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
+                PointBackgroundColor = ColorUtil.FromDrawingColor(ChartColors.Blue),
+                PointBorderColor = "#FFF",
+                PointHoverBackgroundColor = "#FFF",
+                PointHoverBorderColor = ColorUtil.FromDrawingColor(ChartColors.Blue)
+            };
+
+        (_radarConfig.Data.Labels as List<string>)?.AddRange(
+            new string[]{
+            "Eating",
+            "Drinking",
+            "Sleeping",
+            "Designing",
+            "Coding",
+            "Cycling",
+            "Running"});
+
+        _radarConfig.Data.Datasets.Add(dataset1);
+        _radarConfig.Data.Datasets.Add(dataset2);
+        
+    }
+}
