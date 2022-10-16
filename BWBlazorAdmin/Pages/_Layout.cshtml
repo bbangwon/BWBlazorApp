@@ -18,7 +18,8 @@
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">    
+    <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
    
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
@@ -67,6 +68,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="/Components/Buttons">Buttons</a>
+                        <a class="collapse-item" href="/Components/MatButtons">MatButtons</a>
                         <a class="collapse-item" href="/Components/Cards">Cards</a>
                     </div>
                 </div>
@@ -426,5 +428,7 @@
 
     <!-- This is the glue between Blazor and Chart.js -->
     <script src="_content/ChartJs.Blazor.Fork/ChartJsBlazorInterop.js"></script>
+
+    <script src="_content/MatBlazor/dist/matBlazor.js"></script>
 </body>
 </html>
