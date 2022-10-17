@@ -1,0 +1,28 @@
+﻿@page "/Samples/TodoListInMemory"
+
+<h3>할일 리스트</h3>
+
+<input @bind="newTodoString" />
+<input type="button" @onclick="InputTodo" value="할일 추가"/>
+
+<hr />
+
+@foreach (var item in todoItemLists)
+{
+    <input type="checkbox" @bind="item.IsDone" />
+    <input @bind="item.Title" />
+}
+
+
+
+@code {
+    private List<TodoItem> todoItemLists = new List<TodoItem>();
+    string newTodoString = string.Empty;
+
+    void InputTodo()
+    {
+        todoItemLists.Add(new TodoItem { Title = newTodoString });
+        newTodoString = string.Empty;
+    }
+
+}
