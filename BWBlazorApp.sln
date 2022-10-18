@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWBlazorAdmin", "BWBlazorAd
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BWBlazorDB", "BWBlazorDB\BWBlazorDB.sqlproj", "{8700CE03-8662-4A50-9DC4-6D7532388E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWBlazorShared", "BWBlazorShared\BWBlazorShared.csproj", "{1AE0C465-5B2E-4A14-BF01-3F4D977CE529}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWBlazorShared", "BWBlazorShared\BWBlazorShared.csproj", "{1AE0C465-5B2E-4A14-BF01-3F4D977CE529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWBlazorShared.Tests", "BWBlazorShared.Tests\BWBlazorShared.Tests.csproj", "{3B59259B-EDA6-4FB9-B5C8-4D41991BABD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWBlazorShared.Tests", "BWBlazorShared.Tests\BWBlazorShared.Tests.csproj", "{3B59259B-EDA6-4FB9-B5C8-4D41991BABD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWBlazorAPIs", "BWBlazorAPIs\BWBlazorAPIs.csproj", "{719CD4AB-F14F-4327-A941-B349B3A810E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWBlazorAPIs", "BWBlazorAPIs\BWBlazorAPIs.csproj", "{719CD4AB-F14F-4327-A941-B349B3A810E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWBlazorSSO", "BWBlazorSSO\BWBlazorSSO.csproj", "{7A9CF24C-1D20-4A68-A791-9A94ECC881B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWBlazorSSO", "BWBlazorSSO\BWBlazorSSO.csproj", "{7A9CF24C-1D20-4A68-A791-9A94ECC881B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
