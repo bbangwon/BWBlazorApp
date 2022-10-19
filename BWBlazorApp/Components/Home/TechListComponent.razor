@@ -1,0 +1,29 @@
+﻿@using BWBlazorShared
+
+<ul>
+    @foreach (var tech in Teches)
+    {
+        <li>@tech.Title</li>
+    }
+</ul>
+
+@code {
+    private List<Site> teches;
+
+    public List<Site> Teches
+    {
+        get { return teches; }
+        set { teches = value; }
+    }    
+
+    protected override void OnInitialized()
+    {
+        teches = new List<Site>
+        {
+            new Site { Id = 1, Title = "Azure" },
+            new Site { Id = 2, Title = "Blazor" },
+            new Site { Id = 3, Title = "C#" },
+            new Site { Id = 4, Title = "DotNet" },
+        };
+    }
+}
