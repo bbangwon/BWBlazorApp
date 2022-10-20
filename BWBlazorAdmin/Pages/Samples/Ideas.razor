@@ -1,0 +1,82 @@
+﻿@page "/Samples/Ideas"
+
+@inject IIdeaRepository repository
+
+<h3>Ideas</h3>
+
+@if (ideas == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if(ideas.Count == 0)
+{
+    <p><em>No Data...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var idea in ideas)
+            {
+                <tr>
+                    <td>@idea.Id</td>
+                    <td>@idea.Note</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#writeModal" @onclick="@(()=>btnClickCount++)">
+    글쓰기 @btnClickCount 번째 클릭
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="writeModal" tabindex="-1" aria-labelledby="writeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="writeModalLabel">아이디어 저장</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" @onclick="btnClose_Click"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" @bind="@idea.Note">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="(()=>idea.Note = string.Empty)" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" @onclick="btnSave_Click" data-dismiss="modal">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    Idea idea = new Idea();
+
+    private List<Idea>? ideas;
+    private int btnClickCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ideas = await repository.GetIdeas();
+    }
+
+    private void btnClose_Click()
+    {
+        idea.Note = string.Empty;
+    }
+
+    private async Task btnSave_Click()
+    {
+        await repository.AddIdea(idea);
+        ideas = await repository.GetIdeas();
+        idea = new Idea();
+    }
+}

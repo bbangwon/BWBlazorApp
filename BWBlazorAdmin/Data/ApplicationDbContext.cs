@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using BWBlazorShared;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BWBlazorAdmin.Data
@@ -9,5 +10,7 @@ namespace BWBlazorAdmin.Data
             : base(options)
         {
         }
+
+        public DbSet<Idea>? Ideas { get; set; }
     }
 }

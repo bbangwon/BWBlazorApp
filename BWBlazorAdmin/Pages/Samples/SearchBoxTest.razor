@@ -1,0 +1,19 @@
+﻿@page "/Samples/SearchBoxTest"
+@using BWBlazorAdmin.Pages.Samples.Components
+
+<h3>SearchBoxTest</h3>
+
+<SearchBox></SearchBox>
+<SearchBox placeholder="Search Query..." SearchQueryChanged="SearchQueryChanged" Debounce="3000"></SearchBox>
+
+<hr />
+부모: @searchQuery
+
+@code {
+    private string? searchQuery;
+
+    void SearchQueryChanged(string searchQuery)
+    {
+        this.searchQuery = searchQuery;
+    }
+}

@@ -1,0 +1,27 @@
+﻿@page "/Samples/FrmFileUploadTest"
+
+@inject IFileUploadService fileUploadService
+
+<h3>FrmFileUploadTest</h3>
+
+<InputFile OnChange="LoadFiles" muliple />
+
+<input type="button" name="Save" value="업로드" @onclick="UploadClick"/>
+
+@code {
+    private IReadOnlyList<IBrowserFile>? loadedFiles;
+
+    void LoadFiles(InputFileChangeEventArgs e)
+    {
+        loadedFiles = e.GetMultipleFiles();
+    }
+
+    void UploadClick()
+    {
+        if(loadedFiles?.Count > 0)
+        {
+            fileUploadService.UploadAsync(loadedFiles);
+        }
+    }
+
+}

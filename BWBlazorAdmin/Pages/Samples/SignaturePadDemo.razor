@@ -1,0 +1,54 @@
+﻿@page "/Samples/SignaturePadDemo"
+
+@inject IJSRuntime JS
+
+<h3>SignaturePadDemo</h3>
+
+<canvas width="300" height="200" id="theCanvas" style="border: 1px solid red;"></canvas>
+<hr />
+<input type="text" @bind="ImageData" id="textSignature"/>
+<hr />
+@ImageData
+<hr />
+<img src="@ImageData" alt="" />
+<hr />
+<input type="button" value="가져오기" @onclick="GetData" />
+<input type="button" value="지우기" @onclick="CleanData" />
+
+@code {
+    private string ImageData = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeAsync<object>("alert", "렌더 완료");
+            await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
+        }        
+    }
+
+    public async void CleanData()
+    {
+        await JS.InvokeAsync<object>("BlazorSignaturePad", "theCanvas");
+    }
+
+    public void GetData()
+    {
+        ImageData = SignaturePadDemo.GetImageSrc();
+    }
+
+    public static string GetImageSrc()
+    {
+        return ImageDataFromJavaScript;
+    }
+
+
+    private static string ImageDataFromJavaScript = string.Empty;
+
+    //자바스크립트에서 .NET 함수 호출
+    [JSInvokable]
+    public static void GetImageDataAsync(string imageData)
+    {
+        ImageDataFromJavaScript = imageData;
+    }
+}

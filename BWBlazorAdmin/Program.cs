@@ -1,5 +1,7 @@
 using BWBlazorAdmin.Areas.Identity;
 using BWBlazorAdmin.Data;
+using BWBlazorAdmin.Services;
+using BWBlazorShared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -20,6 +22,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddTransient<IIdeaRepository, IdeaRepositoryInMemory>();
+builder.Services.AddTransient<IFileUploadService, FileUploadService>();
 
 var app = builder.Build();
 

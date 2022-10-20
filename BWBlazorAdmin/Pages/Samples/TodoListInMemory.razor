@@ -1,29 +1,43 @@
 ﻿@page "/Samples/TodoListInMemory"
 
-<h3>할일 리스트</h3>
-
-<input @bind="newTodoString" />
-<input type="button" @onclick="InputTodo" value="할일 추가"/>
+<h3>초간단 인-메모리 TODO 리스트</h3>
+<h4>할 일이 총 @todos.Count(t => !t.IsDone) 개 남았습니다.</h4>
 
 <hr />
 
-@foreach (var item in todoItemLists)
-{
-    <input type="checkbox" @bind="item.IsDone" />
-    <input @bind="item.Title" />
-    <br />
-}
+<form @onsubmit="Save">
+    할 일 추가:
+    <input @bind="@newTodo" />
+    <input type="submit" value="추가" />
+</form>
 
+<hr />
 
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>
+            <input type="checkbox" @bind="@todo.IsDone" />
+            <input @bind="@todo.Title" />
+        </li>
+
+    }
+</ul>
 
 @code {
-    private List<TodoItem> todoItemLists = new List<TodoItem>();
-    string newTodoString = string.Empty;
+    private string newTodo = "";
 
-    void InputTodo()
+    //할 일 목록 담을 그릇
+    IList<TodoItem> todos = new List<TodoItem>();
+
+    protected override void OnInitialized()
     {
-        todoItemLists.Add(new TodoItem { Title = newTodoString });
-        newTodoString = string.Empty;
+        
     }
 
+    void Save()
+    {
+        todos.Add(new TodoItem { Title = newTodo });
+        newTodo = string.Empty;
+    }
 }
