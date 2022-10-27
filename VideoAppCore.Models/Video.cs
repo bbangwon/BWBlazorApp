@@ -10,7 +10,7 @@
         /// <summary>
         /// 등록일
         /// </summary>
-        public DateTimeOffset Created { get; set; }
+        public DateTime Created { get; set; }
 
         /// <summary>
         /// 제목
