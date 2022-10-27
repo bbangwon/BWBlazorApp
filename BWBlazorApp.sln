@@ -21,11 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BWBlazor", "BWBlazor", "{6C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VideoApp", "VideoApp", "{26E44AFE-FCB2-4031-B4F6-B75AD476099D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoAppCore", "VideoAppCore\VideoAppCore.csproj", "{FEE6496B-1AC8-4C74-BE2F-EC75CFB55038}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoAppCore", "VideoAppCore\VideoAppCore.csproj", "{FEE6496B-1AC8-4C74-BE2F-EC75CFB55038}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "VideoAppCore.Database", "VideoAppCore.Database\VideoAppCore.Database.sqlproj", "{9A54A5A1-7D02-4FD5-AC8A-44A1CB854183}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoAppCore.Models", "VideoAppCore.Models\VideoAppCore.Models.csproj", "{33E8B852-E777-4F39-958F-72D42B40B710}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoAppCore.Models", "VideoAppCore.Models\VideoAppCore.Models.csproj", "{33E8B852-E777-4F39-958F-72D42B40B710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
