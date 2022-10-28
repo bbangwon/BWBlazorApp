@@ -1,16 +1,13 @@
-﻿namespace VideoAppCore.Models
+﻿using VideoAppCore.Models.Common;
+
+namespace VideoAppCore.Models
 {
-    public class Video
+    public class Video : AuditableBase
     {
         /// <summary>
         /// 일련번호
         /// </summary>
         public int Id { get; set; }
-
-        /// <summary>
-        /// 등록일
-        /// </summary>
-        public DateTime Created { get; set; }
 
         /// <summary>
         /// 제목
