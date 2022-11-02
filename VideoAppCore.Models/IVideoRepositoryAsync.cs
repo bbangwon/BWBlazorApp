@@ -7,7 +7,7 @@
     {
         Task<Video> AddVideoAsync(Video video);
         Task<List<Video>> GetAllAsync();
-        Task<Video> GetByIdAsync(int id);
+        Task<Video?> GetByIdAsync(int id);
         Task<Video> UpdateVideoAsync(Video video);
         Task RemoveVideoAsync(int id);
     }

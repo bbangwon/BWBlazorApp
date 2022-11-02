@@ -1,6 +1,9 @@
 ﻿@page "/Videos/FrmDbContextTest"
 @using VideoAppCore.Models
+
 @inject VideoDbContext VideoDbContext;
+
+@inject IVideoRepositoryAsync repositoty
 
 <h3>FrmDbContextTest</h3>
 
@@ -12,11 +15,11 @@
 </ul>
         
 
-@code {
-    List<Video> videos;
+@code {    
+    List<Video> videos = new List<Video>();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        videos = VideoDbContext.Videos.ToList();
+        videos = await repositoty.GetAllAsync();
     }
 }

@@ -1,12 +1,10 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using VideoAppCore.Areas.Identity;
 using VideoAppCore.Data;
 using VideoAppCore.Models;
+using VideoAppCore.Models._;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +22,8 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddDbContext<VideoDbContext>(options => 
     options.UseSqlServer(connectionString));
+
+builder.Services.AddTransient<IVideoRepositoryAsync, VideoRepositoryEfCoreAsync>();
 
 var app = builder.Build();
 

@@ -1,30 +1,50 @@
-﻿namespace VideoAppCore.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace VideoAppCore.Models
 {
     public class VideoRepositoryEfCoreAsync : IVideoRepositoryAsync
     {
-        public Task<Video> AddVideoAsync(Video video)
+        private readonly VideoDbContext context;
+
+        public VideoRepositoryEfCoreAsync(VideoDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public Task<List<Video>> GetAllAsync()
+        public async Task<Video> AddVideoAsync(Video video)
         {
-            throw new NotImplementedException();
+            this.context.Videos!.Add(video);
+            await this.context.SaveChangesAsync();
+
+            return video;
         }
 
-        public Task<Video> GetByIdAsync(int id)
+        public async Task<Video?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await this.context.Videos!.FindAsync(id);
         }
 
-        public Task RemoveVideoAsync(int id)
+        public async Task<List<Video>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await this.context.Videos!.ToListAsync();
         }
 
-        public Task<Video> UpdateVideoAsync(Video video)
+        public async Task RemoveVideoAsync(int id)
         {
-            throw new NotImplementedException();
+            var video = await GetByIdAsync(id);
+
+            if (video == null)
+                return;
+
+            this.context.Videos!.Remove(video);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task<Video> UpdateVideoAsync(Video video)
+        {
+            this.context.Videos!.Update(video);
+            await this.context.SaveChangesAsync();
+            return video;
         }
     }
 }

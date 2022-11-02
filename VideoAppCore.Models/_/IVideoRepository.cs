@@ -1,4 +1,4 @@
-﻿namespace VideoAppCore.Models
+﻿namespace VideoAppCore.Models._
 {
     /// <summary>
     /// 동기방식

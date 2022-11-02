@@ -1,6 +1,6 @@
-﻿namespace VideoAppCore.Models
+﻿namespace VideoAppCore.Models._
 {
-    public class VideoRepositoryDapper : IVideoRepository
+    public class VideoRepositoryEfCore : IVideoRepository
     {
         public Video AddVideo(Video video)
         {
