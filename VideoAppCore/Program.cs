@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using VideoAppCore.Areas.Identity;
 using VideoAppCore.Data;
 using VideoAppCore.Models;
-using VideoAppCore.Models._;
 
 var builder = WebApplication.CreateBuilder(args);
 
