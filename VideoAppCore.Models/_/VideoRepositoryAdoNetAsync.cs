@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace VideoAppCore.Models
+namespace VideoAppCore.Models._
 {
     public class VideoRepositoryAdoNetAsync : IVideoRepositoryAsync
     {
@@ -18,17 +18,17 @@ namespace VideoAppCore.Models
                                             "Values (@Title, @Url, @Name, @Company, @CreatedBy);" +
                                             "Select Cast(SCOPE_IDENTITY() As Int);";
 
-            SqlCommand cmd = new SqlCommand(query, con) { CommandType = System.Data.CommandType.Text};
+            SqlCommand cmd = new SqlCommand(query, con) { CommandType = System.Data.CommandType.Text };
 
             cmd.Parameters.AddWithValue("@Title", video.Title);
             cmd.Parameters.AddWithValue("@Url", video.Url);
             cmd.Parameters.AddWithValue("@Name", video.Name);
             cmd.Parameters.AddWithValue("@Company", video.Company);
-            cmd.Parameters.AddWithValue("@CreatedBy", video.CreatedBy);           
-            
+            cmd.Parameters.AddWithValue("@CreatedBy", video.CreatedBy);
+
             con.Open();
             object? result = await cmd.ExecuteScalarAsync();
-            if(int.TryParse(result?.ToString(), out int id))
+            if (int.TryParse(result?.ToString(), out int id))
             {
                 video.Id = id;
             }
@@ -47,7 +47,7 @@ namespace VideoAppCore.Models
 
             con.Open();
             SqlDataReader dr = await cmd.ExecuteReaderAsync();
-            if(dr.Read())
+            if (dr.Read())
             {
                 video.Id = dr.GetInt32(0);
                 video.Title = dr["Title"].ToString();
@@ -114,7 +114,7 @@ namespace VideoAppCore.Models
                     ModifiedBy = @ModifiedBy
                 Where Id = @Id";
 
-            SqlCommand cmd = new SqlCommand(query, con) { CommandType= System.Data.CommandType.Text};
+            SqlCommand cmd = new SqlCommand(query, con) { CommandType = System.Data.CommandType.Text };
             cmd.Parameters.AddWithValue("@Id", video.Id);
 
             cmd.Parameters.AddWithValue("@Title", video.Title);

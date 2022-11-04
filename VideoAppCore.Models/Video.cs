@@ -1,4 +1,5 @@
-﻿using VideoAppCore.Models.Common;
+﻿using System.ComponentModel.DataAnnotations;
+using VideoAppCore.Models.Common;
 
 namespace VideoAppCore.Models
 {
@@ -12,6 +13,7 @@ namespace VideoAppCore.Models
         /// <summary>
         /// 제목
         /// </summary>
+        [Required]
         public string? Title { get; set; }
 
         /// <summary>

@@ -1,14 +1,14 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 
-namespace VideoAppCore.Models
+namespace VideoAppCore.Models._
 {
     public class VideoRepositoryDapperAsync : IVideoRepositoryAsync
     {
         private readonly SqlConnection db;
 
         public VideoRepositoryDapperAsync(string connectionString)
-        {            
+        {
             db = new SqlConnection(connectionString);
         }
 
