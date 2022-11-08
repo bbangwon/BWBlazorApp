@@ -1,6 +1,8 @@
 ﻿@page "/Videos/Delete/{id:int}"
+
 @inject IVideoRepositoryAsync repository
 @inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
 
 <h3>Delete</h3>
 
@@ -53,9 +55,18 @@
 
     async Task btnDelete_Click()
     {
-        await repository.RemoveVideoAsync(Id);
+        bool confirm = await jsRuntime.InvokeAsync<bool>("confirm", "정말로 삭제하시겠습니까?");
 
-        navigationManager.NavigateTo("/Videos");
+        if(confirm)
+        {
+            await repository.RemoveVideoAsync(Id);
+
+            navigationManager.NavigateTo("/Videos");
+        }
+        else
+        {
+            await jsRuntime.InvokeVoidAsync("alert", "취소되었습니다.");
+        } 
     }
 
     void btnCancel_Click()
