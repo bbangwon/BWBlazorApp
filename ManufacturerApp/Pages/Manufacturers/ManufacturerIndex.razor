@@ -1,0 +1,73 @@
+﻿@page "/Manufacturers"
+@inject IManufacturerRepository repository
+@inject IJSRuntime jsRuntime
+
+<h3>Manufacturer List</h3>
+
+<p>고객사 리스트를 출력합니다.</p>
+
+@if (manufacturers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Manufacterer Code</th>
+                <th>Comment</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var manufacturer in manufacturers)
+        {
+            <tr>
+                <td>@manufacturer.Id</td>
+                <td>@manufacturer.Name</td>
+                <td>@manufacturer.ManufacturerCode</td>
+                <td>@manufacturer.Comment</td>
+                <td>
+                    <input type="button" value="Edit" class="btn btn-primary" />
+                </td>
+                <td>
+                    <input type="button" value="Delete" class="btn btn-danger"
+                       @onclick="() => DeleteBy(manufacturer)"
+                       data-bs-toggle="modal" data-bs-target="#manufacturerDeleteDialog" />
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<ManufacturerDeleteDialog OnClick="btnDelete_Click"></ManufacturerDeleteDialog>
+
+@code {
+    List<Manufacturer>? manufacturers = null;
+
+    Manufacturer manufacturer = new Manufacturer();
+
+    protected override async Task OnInitializedAsync()
+    {
+        manufacturers = await repository.GetAll();
+    }
+
+    protected async Task btnDelete_Click()
+    {
+        //await jsRuntime.InvokeAsync<object>("alert", "여기까지 왔군요" + this.manufacturer.Id + "번을 지울건가요");
+        await repository.Delete(this.manufacturer.Id);
+        
+        manufacturers = await repository.GetAll();
+        manufacturer = new Manufacturer();
+    }
+
+    private void DeleteBy(Manufacturer manufacturer)
+    {
+        this.manufacturer = manufacturer;
+    }
+}
