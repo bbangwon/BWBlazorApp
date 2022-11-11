@@ -19,25 +19,16 @@ namespace Manufacturer.Models
         }
         public async Task<List<Manufacturer>?> GetAllAsync()       
         {
-            if (this.dbContext.Manufacturers == null)
-                return null;
-
-            return await this.dbContext.Manufacturers.OrderBy(m => m.Id).ToListAsync();
+            return await this.dbContext.Manufacturers!.OrderBy(m => m.Id).ToListAsync();
         }
 
         public async Task<Manufacturer?> GetByIdAsync(int id)
         {
-            if (this.dbContext.Manufacturers == null)
-                return null;
-
-            return await this.dbContext.Manufacturers.FindAsync(id);
+            return await this.dbContext.Manufacturers!.FindAsync(id);
         }
         public async Task<Manufacturer?> EditAsync(Manufacturer manufacturer)
         {
-            if (this.dbContext.Manufacturers == null)
-                return null;
-
-            this.dbContext.Manufacturers.Update(manufacturer);
+            this.dbContext.Manufacturers!.Update(manufacturer);
             await this.dbContext.SaveChangesAsync();
 
             return manufacturer;
@@ -54,6 +45,18 @@ namespace Manufacturer.Models
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task<List<Manufacturer>?> GetAllAsync(int pageIndex, int pageSize = 10)
+        {
+            return await this.dbContext.Manufacturers!
+                .OrderBy(m => m.Id)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
 
+        public async Task<int> CountAsync()
+        {
+            return await this.dbContext.Manufacturers!.CountAsync();
+        }
     }
 }

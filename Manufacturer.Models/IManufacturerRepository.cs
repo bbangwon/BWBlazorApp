@@ -7,5 +7,7 @@
         Task<Manufacturer?> GetByIdAsync(int id);
         Task<Manufacturer?> EditAsync(Manufacturer manufacturer);
         Task DeleteAsync(int id);
+        Task<List<Manufacturer>?> GetAllAsync(int pageIndex, int pageSize);
+        Task<int> CountAsync();
     }
 }

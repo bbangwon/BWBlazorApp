@@ -47,6 +47,8 @@ else
     </table>
 }
 
+<ManufacturerPager Pager="pager" PageIndexChanged="PageIndexChanged"></ManufacturerPager>
+
 <div>
     <input type="button" value="등록" class="btn btn-primary"
            data-bs-toggle="modal" data-bs-target="#manufacturerEditorDialog"
@@ -60,14 +62,21 @@ else
 </ManufacturerEditorForm>
 
 @code {
+    private Pager pager = new Pager
+    {
+        Number = 1,
+        Size = 2,
+        ButtonCount = 2
+    };
+
     private string editorFormTitle = "";
     List<Manufacturer>? manufacturers = null;
 
-    Manufacturer manufacturer = new Manufacturer();
+    Manufacturer manufacturer = new Manufacturer();    
 
     protected override async Task OnInitializedAsync()
     {
-        manufacturers = await repository.GetAllAsync();
+        await LoadManufacturers();
     }
 
     protected async Task btnDelete_Click()
@@ -98,7 +107,20 @@ else
 
     private async void SaveOrUpdated()
     {
-        manufacturers = await repository.GetAllAsync();
+        await LoadManufacturers();
+    }
+
+    protected async void PageIndexChanged(int pageNumber)
+    {
+        pager.Number = pageNumber;
+        await LoadManufacturers();
+    }
+
+    protected async Task LoadManufacturers()
+    {
+        pager.RecordCount = await repository.CountAsync();
+        manufacturers = await repository.GetAllAsync(pager.Index, pager.Size);
+
         StateHasChanged();
     }
 }

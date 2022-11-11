@@ -54,6 +54,15 @@ namespace Manufacturer.Models.Tests
 
             Assert.AreEqual(1, await context.Manufacturers.CountAsync());
 
+            int pageIndex = 0;
+            int pageSize = 2;
+
+            int count = await repository.CountAsync();
+            Assert.AreEqual(1, count);
+
+            manufacturers = await repository.GetAllAsync(pageIndex, pageSize);
+            Assert.AreEqual(1, manufacturers!.ToList().Count);
+
 
 
         } 
