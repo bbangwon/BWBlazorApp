@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ManufacturerApp.Models
+namespace Manufacturer.Models
 {
     public class Manufacturer
-    {
+    {        
         public int Id { get; set; }
         [Required]
         public string? Name { get; set; }

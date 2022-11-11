@@ -24,33 +24,33 @@ else
             </tr>
         </thead>
         <tbody>
-        @foreach (var manufacturer in manufacturers)
-        {
-            <tr>
-                <td>@manufacturer.Id</td>
-                <td>@manufacturer.Name</td>
-                <td>@manufacturer.ManufacturerCode</td>
-                <td>@manufacturer.Comment</td>
-                <td>
-                    <input type="button" value="Edit" class="btn btn-primary"
+            @foreach (var manufacturer in manufacturers)
+            {
+                <tr>
+                    <td>@manufacturer.Id</td>
+                    <td>@manufacturer.Name</td>
+                    <td>@manufacturer.ManufacturerCode</td>
+                    <td>@manufacturer.Comment</td>
+                    <td>
+                        <input type="button" value="Edit" class="btn btn-primary"
                        data-bs-toggle="modal" data-bs-target="#manufacturerEditorDialog"
                        @onclick="(() => EditBy(manufacturer))" />
-                </td>
-                <td>
-                    <input type="button" value="Delete" class="btn btn-danger"
+                    </td>
+                    <td>
+                        <input type="button" value="Delete" class="btn btn-danger"
                        data-bs-toggle="modal" data-bs-target="#manufacturerDeleteDialog"
-                       @onclick="() => DeleteBy(manufacturer)"/>
-                </td>
-            </tr>
-        }
+                       @onclick="() => DeleteBy(manufacturer)" />
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }
 
 <div>
     <input type="button" value="등록" class="btn btn-primary"
-    data-bs-toggle="modal" data-bs-target="#manufacturerEditorDialog" 
-    @onclick="(()=> btnCreate_Click())" />
+           data-bs-toggle="modal" data-bs-target="#manufacturerEditorDialog"
+           @onclick="(()=> btnCreate_Click())" />
 </div>
 
 <ManufacturerDeleteDialog OnClick="btnDelete_Click"></ManufacturerDeleteDialog>
@@ -67,15 +67,15 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        manufacturers = await repository.GetAll();
+        manufacturers = await repository.GetAllAsync();
     }
 
     protected async Task btnDelete_Click()
     {
         //await jsRuntime.InvokeAsync<object>("alert", "여기까지 왔군요" + this.manufacturer.Id + "번을 지울건가요");
-        await repository.Delete(this.manufacturer.Id);
+        await repository.DeleteAsync(this.manufacturer.Id);
 
-        manufacturers = await repository.GetAll();
+        manufacturers = await repository.GetAllAsync();
         manufacturer = new Manufacturer();
     }
 
@@ -98,9 +98,7 @@ else
 
     private async void SaveOrUpdated()
     {
-        manufacturers = await repository.GetAll();
+        manufacturers = await repository.GetAllAsync();
         StateHasChanged();
     }
-
-
 }
