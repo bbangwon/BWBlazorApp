@@ -43,6 +43,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manufacturer.Models.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manufacturer.App", "Manufacturer.App\Manufacturer.App.csproj", "{6327A928-F624-4D19-A60A-F822427A43FC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MachineApp", "MachineApp", "{180156A3-E3BA-4037-9263-9B232B8D99B2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MachineApp.SqlServer", "MachineApp.SqlServer\MachineApp.SqlServer.sqlproj", "{F96279C0-F660-414B-AFB9-0876320221DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +123,12 @@ Global
 		{6327A928-F624-4D19-A60A-F822427A43FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6327A928-F624-4D19-A60A-F822427A43FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6327A928-F624-4D19-A60A-F822427A43FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F96279C0-F660-414B-AFB9-0876320221DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96279C0-F660-414B-AFB9-0876320221DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96279C0-F660-414B-AFB9-0876320221DC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F96279C0-F660-414B-AFB9-0876320221DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F96279C0-F660-414B-AFB9-0876320221DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F96279C0-F660-414B-AFB9-0876320221DC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +151,7 @@ Global
 		{3DD2A693-10D8-412A-B735-55037E7778F6} = {65190A70-2737-414D-A8FA-ACE187AFBE73}
 		{4CAD6724-EDE7-45B5-A426-46C9FA7940D4} = {65190A70-2737-414D-A8FA-ACE187AFBE73}
 		{6327A928-F624-4D19-A60A-F822427A43FC} = {65190A70-2737-414D-A8FA-ACE187AFBE73}
+		{F96279C0-F660-414B-AFB9-0876320221DC} = {180156A3-E3BA-4037-9263-9B232B8D99B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C828790-4660-411D-89BA-1D967343C32B}
