@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MachineApp", "MachineApp", 
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MachineApp.SqlServer", "MachineApp.SqlServer\MachineApp.SqlServer.sqlproj", "{F96279C0-F660-414B-AFB9-0876320221DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineApp.Models", "MachineApp.Models\MachineApp.Models.csproj", "{4638FFB0-163C-47F6-9D31-C8F84D882FF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{F96279C0-F660-414B-AFB9-0876320221DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F96279C0-F660-414B-AFB9-0876320221DC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F96279C0-F660-414B-AFB9-0876320221DC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4638FFB0-163C-47F6-9D31-C8F84D882FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4638FFB0-163C-47F6-9D31-C8F84D882FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4638FFB0-163C-47F6-9D31-C8F84D882FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4638FFB0-163C-47F6-9D31-C8F84D882FF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{4CAD6724-EDE7-45B5-A426-46C9FA7940D4} = {65190A70-2737-414D-A8FA-ACE187AFBE73}
 		{6327A928-F624-4D19-A60A-F822427A43FC} = {65190A70-2737-414D-A8FA-ACE187AFBE73}
 		{F96279C0-F660-414B-AFB9-0876320221DC} = {180156A3-E3BA-4037-9263-9B232B8D99B2}
+		{4638FFB0-163C-47F6-9D31-C8F84D882FF5} = {180156A3-E3BA-4037-9263-9B232B8D99B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C828790-4660-411D-89BA-1D967343C32B}

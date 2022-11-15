@@ -1,0 +1,13 @@
+﻿using MachineApp.Models.Common;
+using System.ComponentModel.DataAnnotations;
+
+namespace MachineApp.Models
+{
+    public class Machine : AuditableBase
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string? Name { get; set; }
+    }
+}
