@@ -1,6 +1,5 @@
 ﻿using MachineApp.Models.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
 using System.ComponentModel.DataAnnotations;
 
 namespace MachineApp.Models
@@ -17,36 +16,53 @@ namespace MachineApp.Models
     {
         Task<Machine> AddMachineAsync(Machine machine); 
         Task<List<Machine>> GetMachinesAsync();
-        Task<Machine> GetMachineByIdAsync(int id);
+        Task<Machine?> GetMachineByIdAsync(int id);
         Task<Machine> EditMachineAsync(Machine machine);
         Task DeleteMachineAsync(int id);        
     }
 
     public class MachineRepository : IMachineRepository
     {
-        public Task<Machine> AddMachineAsync(Machine machine)
+        private readonly MachineDbContext context;
+
+        public MachineRepository(MachineDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public Task DeleteMachineAsync(int id)
+        public async Task<Machine> AddMachineAsync(Machine machine)
         {
-            throw new NotImplementedException();
+            this.context.Add(machine);
+            await this.context.SaveChangesAsync();
+            return machine;
         }
 
-        public Task<Machine> EditMachineAsync(Machine machine)
+        public async Task DeleteMachineAsync(int id)
         {
-            throw new NotImplementedException();
+            var machine = await GetMachineByIdAsync(id);
+            if(machine != null)
+            {
+                this.context.Remove(machine);
+                await this.context.SaveChangesAsync();
+            }
         }
 
-        public Task<Machine> GetMachineByIdAsync(int id)
+        public async Task<Machine> EditMachineAsync(Machine machine)
         {
-            throw new NotImplementedException();
+            context.Update(machine);
+            await this.context.SaveChangesAsync();
+            return machine;
         }
 
-        public Task<List<Machine>> GetMachinesAsync()
+        public async Task<Machine?> GetMachineByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var machine = await this.context.FindAsync<Machine>(id);
+            return machine;
+        }
+
+        public async Task<List<Machine>> GetMachinesAsync()
+        {
+            return await context.Machines!.ToListAsync();
         }
     }
 
