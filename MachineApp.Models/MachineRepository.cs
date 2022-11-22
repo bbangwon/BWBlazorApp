@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MachineApp.Models.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace MachineApp.Models
 {
@@ -44,6 +45,18 @@ namespace MachineApp.Models
         public async Task<List<Machine>> GetMachinesAsync()
         {
             return await context.Machines!.ToListAsync();
+        }
+
+        public async Task<PagingResult<Machine>> GetMachinesPageAsync(int pageIndex, int pageSize)
+        {
+            var totalRecord = await context.Machines!.CountAsync();
+            var machines = await context.Machines!
+                    .OrderByDescending(m => m.Id)
+                    .Skip(pageIndex * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+            return new(machines, totalRecord);
         }
     }
 }
