@@ -1,4 +1,5 @@
 ﻿using MachineApp.Models.Common;
+using MachineApp.Models.Machines;
 using Microsoft.EntityFrameworkCore;
 
 namespace MachineApp.Models

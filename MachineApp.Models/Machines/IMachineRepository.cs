@@ -1,10 +1,10 @@
 ﻿using MachineApp.Models.Common;
 
-namespace MachineApp.Models
+namespace MachineApp.Models.Machines
 {
     public interface IMachineRepository
     {
-        Task<Machine> AddMachineAsync(Machine machine); 
+        Task<Machine> AddMachineAsync(Machine machine);
         Task<List<Machine>> GetMachinesAsync();
         Task<Machine?> GetMachineByIdAsync(int id);
         Task<Machine> EditMachineAsync(Machine machine);
