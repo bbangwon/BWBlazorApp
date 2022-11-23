@@ -48,16 +48,18 @@ namespace MachineApp.Models
             return await context.Machines!.ToListAsync();
         }
 
-        public async Task<PagingResult<Machine>> GetMachinesPageAsync(int pageIndex, int pageSize)
+        public async Task<List<Machine>> GetMachinesPageAsync(int pageIndex, int pageSize)
         {
-            var totalRecord = await context.Machines!.CountAsync();
-            var machines = await context.Machines!
+            return await context.Machines!
                     .OrderByDescending(m => m.Id)
                     .Skip(pageIndex * pageSize)
                     .Take(pageSize)
                     .ToListAsync();
+        }
 
-            return new(machines, totalRecord);
+        public Task<int> GetTotalRecordsCountAsync()
+        {
+            return context.Machines!.CountAsync();
         }
     }
 }

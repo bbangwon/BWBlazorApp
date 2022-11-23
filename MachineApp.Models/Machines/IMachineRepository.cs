@@ -10,6 +10,7 @@ namespace MachineApp.Models.Machines
         Task<Machine> EditMachineAsync(Machine machine);
         Task DeleteMachineAsync(int id);
 
-        Task<PagingResult<Machine>> GetMachinesPageAsync(int pageIndex, int pageSize);
+        Task<List<Machine>> GetMachinesPageAsync(int pageIndex, int pageSize);
+        Task<int> GetTotalRecordsCountAsync();
     }
 }

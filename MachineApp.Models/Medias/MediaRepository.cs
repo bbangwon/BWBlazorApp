@@ -1,5 +1,4 @@
-﻿using MachineApp.Models.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MachineApp.Models
 {
@@ -47,16 +46,18 @@ namespace MachineApp.Models
             return await context.Medias!.ToListAsync();
         }
 
-        public async Task<PagingResult<Media>> GetMediasPageAsync(int pageIndex, int pageSize)
+        public async Task<List<Media>> GetMediasPageAsync(int pageIndex, int pageSize)
         {
-            var totalRecord = await context.Medias!.CountAsync();
-            var madias = await context.Medias!
+            return await context.Medias!
                     .OrderByDescending(m => m.Id)
                     .Skip(pageIndex * pageSize)
                     .Take(pageSize)
                     .ToListAsync();
+        }
 
-            return new(madias, totalRecord);
+        public Task<int> GetTotalRecordsCountAsync()
+        {
+            return context.Medias!.CountAsync();            
         }
     }
 }

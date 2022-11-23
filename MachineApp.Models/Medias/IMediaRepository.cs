@@ -10,6 +10,7 @@ namespace MachineApp.Models
         Task<Media> EditMediaAsync(Media machine);
         Task DeleteMediaAsync(int id);
 
-        Task<PagingResult<Media>> GetMediasPageAsync(int pageIndex, int pageSize);
+        Task<List<Media>> GetMediasPageAsync(int pageIndex, int pageSize);
+        Task<int> GetTotalRecordsCountAsync();
     }
 }

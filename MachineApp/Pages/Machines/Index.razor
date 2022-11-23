@@ -1,0 +1,84 @@
+﻿@page "/Machines"
+@page "/Machines/Index"
+
+@using BWBlazor;
+@using MachineApp.Models;
+@using MachineApp.Models.Machines;
+
+@inject IMachineRepository MachineRepository
+
+<h3>Index</h3>
+
+<div>
+    <a href="/Machines/Create" class="btn btn-primary">Create</a>
+</div>
+
+@if (_machines == null)
+{
+    <MatProgressBar Indeterminate="true"></MatProgressBar>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Created</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var machine in _machines)
+            {
+                <tr>
+                    <td>@machine.Id</td>
+                    <td>
+                        <a href="/Machines/Details/@machine.Id">
+                            @machine.Name
+                        </a>
+                    </td>
+                    <td>@machine.Created.ToShortTimeString()</td>
+                    <td>
+                        <a href="/Machines/Details/@machine.Id" class="btn btn-light">Details</a>
+                        <a href="/Machines/Edit/@machine.Id" class="btn btn-light">Edit</a>
+                        <a href="/Machines/Delete/@machine.Id" class="btn btn-light">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<Pager PagerModel="pagerModel" PageIndexChanged="OnPageIndexChanged"></Pager>
+
+@code {
+    private PagerModel pagerModel = new PagerModel
+    {
+        Number = 1,
+        Size = 2,
+        ButtonCount = 1
+    };
+
+    public List<Machine>? _machines { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {        
+        await Task.Delay(3000);
+        pagerModel.RecordCount = await MachineRepository.GetTotalRecordsCountAsync();
+        LoadPages();
+
+    }
+
+    void OnPageIndexChanged(int pageNumber)
+    {
+        pagerModel.Number = pageNumber;
+        LoadPages();        
+    }
+
+    async void LoadPages()
+    {
+        _machines = await MachineRepository.GetMachinesPageAsync(pagerModel.Index, pagerModel.Size);
+        StateHasChanged();
+    }
+}
