@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BWBlazorShared\BWBlazorShared.csproj" />
+    <ProjectReference Include="..\BWCalendar\BWCalendar.csproj" />
   </ItemGroup>
 
 </Project>
